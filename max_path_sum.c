@@ -10,7 +10,7 @@ int __max_path_sum(int **m, int *visited, int *path, int n, int s, int t){
 
         i = t;
         while(i!=0){
-            printf("%d -> ",i);
+            printf("%d <- ",i);
             cost += m[path[i]][i];
             i = path[i];
         }
