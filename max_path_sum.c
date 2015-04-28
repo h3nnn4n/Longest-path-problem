@@ -10,12 +10,12 @@ int __max_path_sum(int **m, int *visited, int *path, int n, int s, int t){
 
         i = t;
         while(i!=0){
-            printf("%d <- ",i);
+            //printf("%d <- ",i);
             cost += m[path[i]][i];
             i = path[i];
         }
-        printf("0 = %d \n", cost);
-        printf("--------------\n");
+        //printf("0 = %d \n", cost);
+        //printf("--------------\n");
 
         return cost;
     }else{
@@ -67,11 +67,11 @@ int main(int argc, char *argv[]){
     int i, j, n;
     int a, b, w;
 
-    if(argc != 2){
-        //= 5;
+    if(argc == 1){
         scanf("%d", &n);
     }else{
         n = atoi(argv[1]);
+        srand(time(NULL));
     }
 
     m = (int**)malloc(sizeof(int*) * n);
@@ -79,22 +79,29 @@ int main(int argc, char *argv[]){
         m[i] = (int*)malloc(sizeof(int) * n);
     }
 
-    w = 1;
-    while(w > 0){
-        scanf("%d %d %d", &a, &b, &w);
-        if(a < n && b < n && w > 0){
-            m[a][b] = w;
+    if (argc == 1){
+        w = 1;
+        while(w > 0){
+            scanf("%d %d %d", &a, &b, &w);
+            if(a < n && b < n && w > 0){
+                m[a][b] = w;
+            }
+        }
+    }else if(argc == 2){
+        for(i=0;i<n;i++){
+            for(j=0;j<n;j++){
+                m[i][j]= (i != j) ? rand()%20 : 0;
+            }
+        }
+    }else if(argc == 3){
+        w = atoi(argv[2]);
+        while (w > 0){
+            a = rand()%n;
+            b = rand()%n;
+            m[a][b]= (a != j) ? rand()%20 : 0;
+            w--;
         }
     }
-
-    // Uncomment for Kn graphs
-    /*
-    for(i=0;i<n;i++){
-        for(j=0;j<n;j++){
-            m[i][j]= (i != j) ? 1 : 0;
-        }
-    }
-    */
 
     time_t t = clock();
 
