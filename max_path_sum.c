@@ -20,28 +20,21 @@ int __max_path_sum(int **m, int *visited, int *path, int n, int s, int t){
         return cost;
     }else{
         int max, tmp, i;
-        int *vis = (int*)malloc(sizeof(i) * (n+1));
 
         max = -1;
         tmp = -1;
 
         for(i = 0; i<n; i++){
-            vis[i] = visited[i];
-        }
-
-        for(i = 0; i<n; i++){
-            if(vis[i] == 0 && m[s][i] > 0){
-                vis[i] = 1;
+            if(visited[i] == 0 && m[s][i] > 0){
+                visited[i] = 1;
                 path[i] = s;
-                tmp = __max_path_sum(m, vis, path, n, i, t);
+                tmp = __max_path_sum(m, visited, path, n, i, t);
                 if(tmp > max){
                     max = tmp;
                 }
-                vis[i] = 0;
+                visited[i] = 0;
             }
         }
-
-        free(vis);
 
         return max;
     }
